@@ -10,6 +10,12 @@ defmodule Jupiter.WeatherService do
       |> fetch_weather_info()
   end
 
+  def query(city, country) do
+    %{"q" => "#{city},#{country}"}
+      |> service_params()
+      |> fetch_weather_info()
+  end
+
   defp fetch_weather_info(params) do
     case HTTPoison.get(service_url(), [], [{:params, params}]) do
       {:ok, %HTTPoison.Response{body: body}} ->
