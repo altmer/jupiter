@@ -39,4 +39,10 @@ defmodule Jupiter.WeatherServiceTest do
       }
     end
   end
+
+  test "random_place returns correct error when JSON has unexpected form" do
+    with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_unexpected() end) do
+      assert WeatherService.random_place == {:error, "JSON parse failed"}
+    end
+  end
 end
