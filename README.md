@@ -1,5 +1,4 @@
 ## Jupiter - Openweathermap client
-=======================================
 
 ## Dev setup
 
@@ -16,4 +15,5 @@ TODO: explain here prod setup (docker)
 
 ## Next steps
 
-1. TODO: Logging
+1. TODO: Logging setup
+2. React-router

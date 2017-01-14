@@ -18,7 +18,7 @@ defmodule Jupiter.Router do
 
     scope "/weather" do
       get "/random", WeatherController, :random
-      # get "/search", WeatherController, :search
+      get "/query", WeatherController, :query
     end
   end
 

@@ -10,7 +10,15 @@ defmodule Jupiter.WeatherController do
   alias Jupiter.WeatherService
 
   def random(conn, _params) do
-    case WeatherService.random_place do
+    conn |> weather_response(WeatherService.random_place)
+  end
+
+  def query(conn, %{"city" => city, "country" => country}) do
+    conn |> weather_response(WeatherService.query(city, country))
+  end
+
+  defp weather_response(conn, resp) do
+    case resp do
       {:ok, weather} ->
         conn
           |> put_status(:ok)
@@ -21,8 +29,4 @@ defmodule Jupiter.WeatherController do
           |> render("error.json", %{error: reason})
     end
   end
-
-  # def search(conn, %{"city" => city, "country" => country}) do
-  #   render(conn, "weather.json", WeatherService.random_place)
-  # end
 end
