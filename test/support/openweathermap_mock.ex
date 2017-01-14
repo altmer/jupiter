@@ -20,7 +20,7 @@ defmodule OpenweathermapMock do
       response(
       """
       {
-        "cod": 503,
+        "cod": "503",
         "message" : "City not found"
       }
       """
