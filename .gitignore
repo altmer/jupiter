@@ -25,3 +25,4 @@ erl_crash.dump
 
 # do not commit file with production env variables
 .env
+run.sh

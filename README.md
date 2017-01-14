@@ -12,8 +12,9 @@ TODO: explain here project setup
 ## Next steps
 
 1. TODO: Logging setup
-2. Caching using ConCache
-3. React-router
-4. Better frontend design
-5. More frontend specs (test interactions)
-6. Integration specs using Hound and Phantomjs
+2. Production docker image
+3. Caching using ConCache
+4. React-router
+5. Better frontend design
+6. More frontend specs (test interactions)
+7. Integration specs using Hound and Phantomjs
