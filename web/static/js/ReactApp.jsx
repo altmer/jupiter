@@ -8,7 +8,7 @@ import Form from './Form';
 import Error from './Error';
 import Weather from './Weather';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
