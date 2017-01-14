@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Welcome from './Welcome';
 import Form from './Form';
 import Error from './Error';
+import Weather from './Weather';
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
     this.randomPlaceSelected = this.randomPlaceSelected.bind(this);
     this.queryPlace = this.queryPlace.bind(this);
     this.maybeRenderError = this.maybeRenderError.bind(this);
+    this.maybeRenderWeather = this.maybeRenderWeather.bind(this);
   }
 
   randomPlaceSelected() {
@@ -49,6 +51,13 @@ class App extends Component {
     return null;
   }
 
+  maybeRenderWeather() {
+    if (this.state.weather) {
+      return (<Weather weather={this.state.weather} />);
+    }
+    return null;
+  }
+
   render() {
     return (
       <div>
@@ -61,6 +70,7 @@ class App extends Component {
             loading={this.state.loading}
           />
           {this.maybeRenderError()}
+          {this.maybeRenderWeather()}
         </div>
       </div>
     );

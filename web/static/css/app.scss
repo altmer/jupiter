@@ -32,3 +32,14 @@
   font-size: 1.4em;
   margin-top: 2em;
 }
+
+.weather-info {
+  .temperature {
+    font-size: 2em;
+  }
+  .coordinates {
+    margin-top: 1em;
+    color: grey;
+    font-size: .8em;
+  }
+}
