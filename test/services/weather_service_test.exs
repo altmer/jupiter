@@ -27,7 +27,6 @@ defmodule Jupiter.WeatherServiceTest do
     with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_success() end) do
       assert WeatherService.random_place == {:ok, %{
           "name" => "Shcherbinka",
-          "country" => "RU",
           "lat" => 55.5,
           "lon" => 37.56,
           "temperature" => -1.25,
@@ -43,6 +42,24 @@ defmodule Jupiter.WeatherServiceTest do
   test "random_place returns correct error when JSON has unexpected form" do
     with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_unexpected() end) do
       assert WeatherService.random_place == {:error, "JSON parse failed"}
+    end
+  end
+
+  test "random_place returns API error when API returned error code" do
+    with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_api_error() end) do
+      assert WeatherService.random_place == {:error, "City not found"}
+    end
+  end
+
+  test "random_place returns server error reason when API does not answer" do
+    with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_server_error() end) do
+      assert WeatherService.random_place == {:error, "Connection refused"}
+    end
+  end
+
+  test "random_place returns parse error when JSON is malformed" do
+    with_mocked_call_by_coords(fn(_, _, _) -> OpenweathermapMock.get_malformed_json() end) do
+      assert WeatherService.random_place == {:error, "JSON is malformed"}
     end
   end
 end

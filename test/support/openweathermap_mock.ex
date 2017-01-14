@@ -2,6 +2,31 @@ defmodule OpenweathermapMock do
   @moduledoc """
     Mock for openweathermap API
   """
+  def get_malformed_json do
+    {
+      :ok,
+      response("nope, this is not json, just plain text")
+    }
+  end
+  def get_server_error do
+    {
+      :error,
+      error("Connection refused")
+    }
+  end
+  def get_api_error do
+    {
+      :ok,
+      response(
+      """
+      {
+        "cod": 503,
+        "message" : "City not found"
+      }
+      """
+      )
+    }
+  end
   def get_unexpected() do
     {
       :ok,
@@ -79,6 +104,12 @@ defmodule OpenweathermapMock do
       body: body,
       headers: [{"Server", "nginx"}, {"Content-Type", "application/json"}],
       status_code: 200
+    }
+  end
+
+  defp error(reason) do
+    %HTTPoison.Error{
+      reason: reason
     }
   end
 end

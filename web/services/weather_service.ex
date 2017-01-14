@@ -12,7 +12,7 @@ defmodule Jupiter.WeatherService do
 
   defp fetch_weather_info(params) do
     case HTTPoison.get(service_url(), [], [{:params, params}]) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+      {:ok, %HTTPoison.Response{body: body}} ->
         prepare_response(body)
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
@@ -20,15 +20,20 @@ defmodule Jupiter.WeatherService do
   end
 
   defp prepare_response(body) do
-    {:ok, res} = Poison.decode(body)
-    if res["cod"] == 200 do
-      try do
-        {:ok, parse(res)}
-      rescue
-        _ in MatchError -> {:error, "JSON parse failed"}
-      end
-    else
-      {:error, res["message"]}
+    case Poison.decode(body) do
+      {:ok, res} ->
+        if res["cod"] == 200 do
+          try do
+            {:ok, parse(res)}
+          rescue
+            _ in MatchError ->
+              {:error, "JSON parse failed"}
+          end
+        else
+          {:error, res["message"]}
+        end
+      _ ->
+        {:error, "JSON is malformed"}
     end
   end
 
@@ -69,14 +74,10 @@ defmodule Jupiter.WeatherService do
           "main" => category,
           "description" => description
         } | _
-      ],
-      "sys" => %{
-        "country" => country
-      }
+      ]
     } = json
     %{
       "name" => name,
-      "country" => country,
       "lat" => lat,
       "lon" => lon,
       "temperature" => temperature,
