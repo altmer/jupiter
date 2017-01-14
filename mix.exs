@@ -17,7 +17,8 @@ defmodule Jupiter.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Jupiter, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger,
+                    :gettext, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -34,7 +35,9 @@ defmodule Jupiter.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:credo, "~> 0.5", only: [:dev, :test]}
+     {:httpoison, "~> 0.10.0"},
+     {:credo, "~> 0.5", only: [:dev, :test]},
+     {:mock, "~> 0.2.0", only: :test}
    ]
   end
 end

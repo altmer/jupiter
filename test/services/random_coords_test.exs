@@ -1,6 +1,6 @@
 defmodule Jupiter.RandomCoordsTest do
   @moduledoc """
-    Test
+    Test for RandomCoords
   """
   use ExUnit.Case, async: true
 

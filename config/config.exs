@@ -6,12 +6,14 @@
 use Mix.Config
 
 # Configures the endpoint
-config :jupiter, Jupiter.Endpoint,
+config :jupiter,
+  Jupiter.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "04GWbIo53pRKF4F4cCCYY4XuN92OIGYj6eEC8fWKRl7fVWBCJu1wG15Ysbonc0qf",
   render_errors: [view: Jupiter.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Jupiter.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  openweathermap_api_key: System.get_env("OPENWEATHERMAP_API_KEY")
 
 # Configures Elixir's Logger
 config :logger, :console,
