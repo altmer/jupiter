@@ -1,6 +1,8 @@
 ## Jupiter
 
-Welcome to your Elixir-based Openweathermap client!
+Jupiter is Elixir-based Openweathermap client.
+
+![screen](https://s27.postimg.org/3n2smwgmr/Jupiter.png)
 
 ## Setup
 
